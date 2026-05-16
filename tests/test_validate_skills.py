@@ -1,6 +1,3 @@
-from pathlib import Path
-
-
 # ─── helpers ──────────────────────────────────────────────────────────────────
 
 
@@ -26,8 +23,7 @@ def _fm(
         "  role: specialist\n"
         f"  scope: {scope}\n"
         f"  output-format: {output_format}\n"
-        '  related-skills: ""\n'
-        + extra_metadata
+        '  related-skills: ""\n' + extra_metadata
     )
 
 
@@ -283,12 +279,7 @@ def test_metadata_fields_no_metadata_key(make_skill_dir, validate_skills):
 
 
 def test_metadata_fields_metadata_not_dict(make_skill_dir, validate_skills):
-    fm = (
-        "name: test-skill\n"
-        "description: Does things. Use when needed.\n"
-        "license: MIT\n"
-        "metadata: not-a-dict\n"
-    )
+    fm = "name: test-skill\ndescription: Does things. Use when needed.\nlicense: MIT\nmetadata: not-a-dict\n"
     skill_dir = make_skill_dir(frontmatter=fm)
     issues = validate_skills.MetadataFieldsChecker().check(skill_dir, "test-skill")
     errors = [i for i in issues if i.severity == validate_skills.Severity.ERROR]
