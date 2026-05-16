@@ -46,8 +46,12 @@ validate:
 	python scripts/validate-markdown.py --check
 	python scripts/update-docs.py --check
 
+test-py:
+	pytest tests/ -v --tb=short
+
 test:
 	bash scripts/test-makefile.sh
+	pytest tests/ -v --tb=short
 
 site-dev:
 	cd site && npm run dev
