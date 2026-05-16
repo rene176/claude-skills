@@ -18,7 +18,7 @@ jobs:
           python-version: "3.x"
 
       - name: Install dependencies
-        run: pip install pyyaml
+        run: pip install -r requirements-dev.txt
 
       - name: Validate skills
         run: python scripts/validate-skills.py
@@ -28,6 +28,21 @@ jobs:
 
       - name: Check docs in sync
         run: python scripts/update-docs.py --check
+
+  test-py:
+    name: Python Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+      - name: Run pytest
+        run: pytest tests/ -v --tb=short
 
   lint:
     name: Lint & Format Check

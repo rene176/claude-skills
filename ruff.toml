@@ -1,4 +1,4 @@
-include = ["scripts/*.py"]
+include = ["scripts/*.py", "tests/*.py"]
 target-version = "py311"
 line-length = 120
 
